@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement3D : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;          
     [SerializeField] private float rotationSpeed = 360f; 
     [SerializeField] private Transform cameraTransform;  // Reference to the camera's transform
+    [SerializeField] private GameObject winScreenPanel;  // Reference to the "You Won" screen panel
 
     private PlayerControls controls;   
     private Vector2 moveInput;         
@@ -60,6 +61,12 @@ public class PlayerMovement3D : MonoBehaviour
             if (anim == null)
             {
                 Debug.LogWarning("Animator component not found on the player.");
+            }
+
+            // Ensure the win screen is hidden initially
+            if (winScreenPanel != null)
+            {
+                winScreenPanel.SetActive(false);
             }
         }
         catch (System.Exception ex)
@@ -117,6 +124,36 @@ public class PlayerMovement3D : MonoBehaviour
         catch (System.Exception ex)
         {
             Debug.LogError("Error in Update method: " + ex.Message);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        try
+        {
+            // Check if the collided object has the tag "Sphere" and is on the appropriate layer
+            if (collision.gameObject.CompareTag("Sphere") && collision.gameObject.layer == LayerMask.NameToLayer("Sphere"))
+            {
+                Debug.LogError("collision Detected");
+                ShowWinScreen();
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error in OnCollisionEnter method: " + ex.Message);
+        }
+    }
+
+    private void ShowWinScreen()
+    {
+        // Enable the win screen panel
+        if (winScreenPanel != null)
+        {
+            winScreenPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Win Screen Panel is not assigned in the Inspector.");
         }
     }
 }
