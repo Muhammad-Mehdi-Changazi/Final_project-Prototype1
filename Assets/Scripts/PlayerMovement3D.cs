@@ -9,10 +9,12 @@ public class PlayerMovement3D : MonoBehaviour
     [SerializeField] private float rotationSpeed = 360f; 
     [SerializeField] private Transform cameraTransform;  // Reference to the camera's transform
     [SerializeField] private GameObject winScreenPanel;  // Reference to the "You Won" screen panel
+    [SerializeField] private GameObject startScreenPanel; // Reference to the start screen panel
 
     private PlayerControls controls;   
     private Vector2 moveInput;         
     private Animator anim;             
+    private bool gameStarted = false;  // Flag to track if the game has started
 
     private void Awake()
     {
@@ -63,10 +65,15 @@ public class PlayerMovement3D : MonoBehaviour
                 Debug.LogWarning("Animator component not found on the player.");
             }
 
-            // Ensure the win screen is hidden initially
+            // Ensure the win screen and start screen are set correctly
             if (winScreenPanel != null)
             {
                 winScreenPanel.SetActive(false);
+            }
+
+            if (startScreenPanel != null)
+            {
+                startScreenPanel.SetActive(true); // Show the start screen initially
             }
         }
         catch (System.Exception ex)
@@ -77,6 +84,8 @@ public class PlayerMovement3D : MonoBehaviour
 
     private void Update()
     {
+        if (!gameStarted) return; // Do nothing if the game hasn't started yet
+
         try
         {
             // Get the camera's forward and right directions
@@ -134,7 +143,6 @@ public class PlayerMovement3D : MonoBehaviour
             // Check if the collided object has the tag "Sphere" and is on the appropriate layer
             if (collision.gameObject.CompareTag("Sphere") && collision.gameObject.layer == LayerMask.NameToLayer("Sphere"))
             {
-                Debug.LogError("collision Detected");
                 ShowWinScreen();
             }
         }
@@ -154,6 +162,18 @@ public class PlayerMovement3D : MonoBehaviour
         else
         {
             Debug.LogWarning("Win Screen Panel is not assigned in the Inspector.");
+        }
+    }
+
+    public void StartGame()
+    {
+        // Called when the Start Game button is clicked
+        gameStarted = true;
+
+        // Hide the start screen
+        if (startScreenPanel != null)
+        {
+            startScreenPanel.SetActive(false);
         }
     }
 }
