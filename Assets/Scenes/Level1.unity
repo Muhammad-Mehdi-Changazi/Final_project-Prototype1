@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 1
   m_FogColor: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 1}
   m_FogMode: 1
@@ -42,8 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -66,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -195,6 +192,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -288,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: c113ffb087a7ee14eb783866f48396c5,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 715199930b1d60f4b8e7cf3c9e55b59d, type: 2}
     - target: {fileID: 919132149155446097, guid: c113ffb087a7ee14eb783866f48396c5,
@@ -469,15 +469,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -603,15 +605,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -647,7 +651,6 @@ GameObject:
   m_Component:
   - component: {fileID: 330585546}
   - component: {fileID: 330585545}
-  - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   m_Layer: 0
@@ -657,14 +660,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &330585544
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -999,9 +994,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 10
@@ -1051,8 +1045,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!4 &410087041
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,18 +1200,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7661594
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7661594
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7661594
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 130.1
+      value: 126.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.5
+      value: 46.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 140.5
+      value: 139.23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 32a942be590f7d641a82fa6c159bb6d4,
         type: 3}
@@ -2265,17 +2278,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1354080620962751942, guid: 0e01250e79ed7b64b8f2814653da63c5,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ca6a8ed4c8b2562419e40954d29f15c9, type: 2}
     - target: {fileID: 1354080620962751942, guid: 0e01250e79ed7b64b8f2814653da63c5,
         type: 3}
-      propertyPath: m_Materials.Array.data[1]
+      propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: ca6a8ed4c8b2562419e40954d29f15c9, type: 2}
     - target: {fileID: 1354080620962751942, guid: 0e01250e79ed7b64b8f2814653da63c5,
         type: 3}
-      propertyPath: m_Materials.Array.data[2]
+      propertyPath: 'm_Materials.Array.data[2]'
       value: 
       objectReference: {fileID: 2100000, guid: ca6a8ed4c8b2562419e40954d29f15c9, type: 2}
     - target: {fileID: 2223639932434330405, guid: 0e01250e79ed7b64b8f2814653da63c5,
@@ -2445,6 +2458,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2492,7 +2508,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608491335}
   serializedVersion: 4
-  m_Mass: 1000
+  m_Mass: 1500
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2607,7 +2623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6033778302619684204, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f22756a69866fe14999ab9de584a33ad, type: 2}
     - target: {fileID: -2108911636436352080, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
@@ -2617,22 +2633,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -582136833068305851, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c39acf2c7a639d7418417a8e5e27eae0, type: 2}
     - target: {fileID: -256571060099304185, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f75c45ab63641ea4d8a58a0fdcb7eb8f, type: 2}
     - target: {fileID: 256902747680191283, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c39acf2c7a639d7418417a8e5e27eae0, type: 2}
     - target: {fileID: 453640813216508058, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f22756a69866fe14999ab9de584a33ad, type: 2}
     - target: {fileID: 919132149155446097, guid: 09ed7f4dee5e9fe43b217e4cb272a858,
@@ -3735,6 +3751,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4206,15 +4225,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4486,12 +4507,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: 73f38caeeb3abbf4fb4ee2c9e2c07512,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d2020ad04c704ff4b9afb95c47dacc10, type: 2}
     - target: {fileID: -7635826562936255635, guid: 73f38caeeb3abbf4fb4ee2c9e2c07512,
         type: 3}
-      propertyPath: m_Materials.Array.data[1]
+      propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: d2020ad04c704ff4b9afb95c47dacc10, type: 2}
     - target: {fileID: 919132149155446097, guid: 73f38caeeb3abbf4fb4ee2c9e2c07512,

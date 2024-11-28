@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement3D : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;          
+    [SerializeField] private float speed = 5f;          
     [SerializeField] private float rotationSpeed = 360f; 
     [SerializeField] private Transform cameraTransform;  // Reference to the camera's transform
     [SerializeField] private GameObject winScreenPanel;  // Reference to the "You Won" screen panel
@@ -14,6 +14,7 @@ public class PlayerMovement3D : MonoBehaviour
     private PlayerControls controls;   
     private Vector2 moveInput;         
     private Animator anim;             
+    private Rigidbody rb;              // Rigidbody reference
     private bool gameStarted = false;  // Flag to track if the game has started
 
     private void Awake()
@@ -59,6 +60,7 @@ public class PlayerMovement3D : MonoBehaviour
     {
         try
         {
+            rb = GetComponent<Rigidbody>(); // Initialize Rigidbody
             anim = GetComponent<Animator>();
             if (anim == null)
             {
@@ -82,42 +84,49 @@ public class PlayerMovement3D : MonoBehaviour
         }    
     }
 
+    private void FixedUpdate()
+    {
+        if (!gameStarted) return; // Do nothing if the game hasn't started yet
+
+        // Get the camera's forward and right directions
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 cameraRight = cameraTransform.right;
+
+        // Flatten the camera directions on the Y-axis
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // Calculate the movement direction relative to the camera
+        Vector3 moveDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
+
+        // Apply movement using the Rigidbody
+        Vector3 velocity = moveDirection * speed;
+        velocity.y = rb.linearVelocity.y; // Preserve the Y-axis velocity (gravity effect)
+        rb.linearVelocity = velocity;
+
+        // Rotate the player to face the direction of movement
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+        }
+
+        // Update the animator's IsMoving parameter
+        bool isMoving = moveInput != Vector2.zero;
+        if (anim != null)
+        {
+            anim.SetBool("IsMoving", isMoving);
+        }
+    }
+
     private void Update()
     {
         if (!gameStarted) return; // Do nothing if the game hasn't started yet
 
         try
         {
-            // Get the camera's forward and right directions
-            Vector3 cameraForward = cameraTransform.forward;
-            Vector3 cameraRight = cameraTransform.right;
-
-            // Flatten the camera directions on the Y-axis
-            cameraForward.y = 0;
-            cameraRight.y = 0;
-            cameraForward.Normalize();
-            cameraRight.Normalize();
-
-            // Calculate the movement direction relative to the camera
-            Vector3 moveDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
-
-            // Move the player
-            transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
-
-            // Rotate the player to face the direction of movement
-            if (moveDirection != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
-
-            // Update the animator's IsMoving parameter
-            bool isMoving = moveInput != Vector2.zero;
-            if (anim != null)
-            {
-                anim.SetBool("IsMoving", isMoving);
-            }
-
             // Attack animation
             if (Input.GetKeyDown(KeyCode.X) && anim != null)
             {
