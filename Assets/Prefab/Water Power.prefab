@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3645570479143102342}
   - component: {fileID: 2033984860318431031}
   - component: {fileID: 4219131111397201956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water Power
-  m_TagString: Untagged
+  m_TagString: Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

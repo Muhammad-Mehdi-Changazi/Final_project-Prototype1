@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1762989308828334143}
   - component: {fileID: 1171751867132995005}
   - component: {fileID: 5630530210279597919}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EarthPower
-  m_TagString: Untagged
+  m_TagString: Bullets
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
