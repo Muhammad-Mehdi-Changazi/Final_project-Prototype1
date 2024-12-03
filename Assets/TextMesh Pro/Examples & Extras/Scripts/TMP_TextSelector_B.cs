@@ -491,8 +491,19 @@ namespace TMPro.Examples
 
             // Restore UV0S
             // UVS0
+<<<<<<< Updated upstream
             Vector4[] src_uv0s = m_cachedMeshInfoVertexData[materialIndex].uvs0;
             Vector4[] dst_uv0s = m_TextMeshPro.textInfo.meshInfo[materialIndex].uvs0;
+=======
+            Vector2[] src_uv0s = m_cachedMeshInfoVertexData[materialIndex].uvs0;
+            Vector2[] dst_uv0s = m_TextMeshPro.textInfo.meshInfo[materialIndex].uvs0;
+
+            for (int j = 0; j < sourceUVs0.Length; j++)
+            {
+                destinationUVs0[j] = new Vector2(sourceUVs0[j].x, sourceUVs0[j].y);
+            }
+
+>>>>>>> Stashed changes
             dst_uv0s[vertexIndex + 0] = src_uv0s[vertexIndex + 0];
             dst_uv0s[vertexIndex + 1] = src_uv0s[vertexIndex + 1];
             dst_uv0s[vertexIndex + 2] = src_uv0s[vertexIndex + 2];
