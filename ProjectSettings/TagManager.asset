@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sphere
+  - Fire
+  - Earth
+  - Water
   - Bullets
   layers:
   - Default
@@ -15,9 +18,9 @@ TagManager:
   - UI
   - terrain
   - Sphere
-  - Bullets
-  - 
-  - 
+  - Fire
+  - Earth
+  - Water
   - 
   - 
   - 
