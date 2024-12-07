@@ -14,10 +14,17 @@ TagManager:
   - UI
   - terrain
   - Sphere
+<<<<<<< Updated upstream
   - 
   - 
   - 
   - 
+=======
+  - Fire
+  - Earth
+  - Water
+  - Player
+>>>>>>> Stashed changes
   - 
   - 
   - 
