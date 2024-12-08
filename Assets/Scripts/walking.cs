@@ -43,6 +43,7 @@ public class WalkingSound : MonoBehaviour
         if (rb != null)
         {
             return rb.linearVelocity.magnitude > 0.1f;
+
         }
 
         return false;

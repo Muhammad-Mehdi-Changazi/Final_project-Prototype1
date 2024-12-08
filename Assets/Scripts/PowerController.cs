@@ -33,6 +33,7 @@ public class PowerController : MonoBehaviour
         // Ensure the bullet moves in the fire point's forward direction
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Vector3 bulletDirection = firePoint.forward.normalized; // Get the firePoint's forward direction
+
         rb.linearVelocity = bulletDirection * bulletSpeed;            // Apply velocity to the bullet
 
         // Destroy the bullet after 5 seconds to prevent clutter
