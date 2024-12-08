@@ -42,7 +42,8 @@ public class WalkingSound : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            return rb.velocity.magnitude > 0.1f;
+            return rb.linearVelocity.magnitude > 0.1f;
+
         }
 
         return false;
